@@ -1,0 +1,27 @@
+import { CsvFileReader } from "./CsvFileReader";
+import { MatchResults } from "../MatchResult";
+import { dateStringtoDate } from "../utils";
+
+type resConvert = [
+    Date,
+    string,
+    string,
+    number,
+    number,
+    MatchResults,
+    string
+  ];
+
+export class MatchReader extends CsvFileReader<resConvert>{
+    mapRow(row:string[]):resConvert{
+        return[
+            dateStringtoDate(row[0]) ,
+                row[1],
+                row[2],
+                parseInt(row[3] ),
+                parseInt(row[4]),
+                row[5] as MatchResults,
+                row[6]
+        ]
+  }
+}
